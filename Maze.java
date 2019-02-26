@@ -4,7 +4,7 @@ import java.util.Scanner;
 public class Maze{
   public String Maze1;
   public static void main(String[] args) throws FileNotFoundException {
-    File text = new File("input.txt");
+    File text = new File("Maze1.txt");
     Scanner inf = new Scanner(text);
     while(inf.hasNextLine()){
       String line = inf.nextLine();
