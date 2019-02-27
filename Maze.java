@@ -75,17 +75,18 @@ public class Maze{
 
     */
     public int solve(){
-
-            //find the location of the S.
-
-
+      //find the location of the S.
+      for (int y = 0; y < maze.length; y++){
+        for (int x = 0; x < maze[0].length; x++){
+          if (maze[y][x] == "S"){
             //erase the S
-
-
-            //and start solving at the location of the s.
-
-            //return solve(???,???);
-
+            maze[y][x] = " ";
+            startRow = y;
+            startCol = x;
+            return solve(y, x);
+          }
+        }
+      }
     }
 
     /*
