@@ -107,7 +107,8 @@ public class Maze{
         All visited spots that are part of the solution are changed to '@'
     */
     private int solve(int row, int col){ //you can add more parameters since this is private
-
+        maze[row][col] == "@";
+        int[][] moves = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
 
         //automatic animation! You are welcome.
         if(animate){
