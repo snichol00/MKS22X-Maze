@@ -116,7 +116,7 @@ public class Maze{
             maze[y][x] = " ";
             startRow = y;
             startCol = x;
-            return solve(y, x);
+            return solve(y, x, 0);
           }
         }
       }
@@ -139,10 +139,20 @@ public class Maze{
 
         All visited spots that are part of the solution are changed to '@'
     */
-    private int solve(int row, int col){ //you can add more parameters since this is private
+    private int solve(int row, int col, int output){ //you can add more parameters since this is private
         maze[row][col] == "@";
+        int output += 1;
         int[][] moves = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
-
+        for (int move = 0; move < 4; move++){
+          int newRow = row + moves[move][0];
+          int newCol = col + moves[move][1];
+          if (maze[newRow][newCol] == ' '){
+            solve(newRow, newCol, output);
+          }
+          if (maze[newRow][newCol] == 'E'){
+            return output;
+          }
+        }
 
         //automatic animation! You are welcome.
         if(animate){
