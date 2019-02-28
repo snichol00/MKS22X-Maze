@@ -45,6 +45,23 @@ public class Maze{
       //initializes maze Array
       maze = new int[rows][cols];
       //checks for 1 "E" and 1 "S"
+      int e = 0;
+      int s = 0;
+      //adds chars to array
+      for (int y = 0; y < rows; y++){
+        for (int x = 0; x < cols; x++){
+          maze[y][x] = lines.get(y).charAt(x);
+          if (maze[y][x] == 'S'){
+            s++;
+          }
+          if (maze[y][x] == 'E'){
+            e++;
+          }
+        }
+      }
+      if (e != 1 || s != 1){
+        throw new llegalStateException();
+      }
     }
 
 
