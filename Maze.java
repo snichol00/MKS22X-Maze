@@ -141,8 +141,9 @@ public class Maze{
     */
     private int solve(int row, int col, int output){ //you can add more parameters since this is private
         maze[row][col] == "@";
-        int output += 1;
+        output++;
         int[][] moves = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+        int fails = 0;
         for (int move = 0; move < 4; move++){
           int newRow = row + moves[move][0];
           int newCol = col + moves[move][1];
@@ -152,6 +153,28 @@ public class Maze{
           if (maze[newRow][newCol] == 'E'){
             return output;
           }
+          else{
+            fails++;
+          }
+        }
+        if (fails == 4){
+          maze[newRow][newCol] = '.';
+          output --;
+          for (int move = 0; move < 4; move++){
+            int fails1 = 0;
+            int newRow = row + moves[move][0];
+            int newCol = col + moves[move][1];
+            if (maze[newRow][newCol] == '@'){
+              solve(newRow, newCol, output);
+            }
+            else{
+              fails1++;
+            }
+          }
+          if (fails1 == 4){
+            return -1;
+          }
+          return output;
         }
 
         //automatic animation! You are welcome.
