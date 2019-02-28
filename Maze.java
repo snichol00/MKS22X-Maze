@@ -29,16 +29,22 @@ public class Maze{
     */
 
     public Maze(String filename) throws FileNotFoundException{
-        //COMPLETE CONSTRUCTOR
-        public String Maze1;
-        public static void main(String[] args) throws FileNotFoundException {
-          File text = new File("Maze1.txt");
-          Scanner inf = new Scanner(text);
-          while(inf.hasNextLine()){
-            String line = inf.nextLine();
-            Maze1 += line;
-          }
-        }
+      //do I use try to throw FileNotFound?
+      File text = new File(fileName);
+      Scanner inf = new Scanner(text);
+      //will store the lines of the file
+      ArrayList<String> lines = new ArrayList<String>();
+      //adds the lines
+      while(inf.hasNextLine()){
+        String line = inf.nextLine();
+        lines.add(line);
+      }
+      //stores dimensions of Maze
+      int rows = lines.size();
+      int cols = lines.get(0).length();
+      //initializes maze Array
+      maze = new int[rows][cols];
+      //checks for 1 "E" and 1 "S"
     }
 
 
