@@ -64,6 +64,16 @@ public class Maze{
       }
     }
 
+    public String toString(){
+      String output = "";
+      for (int y = 0; y < maze.length; y++){
+        for (int x = 0; x < maze[0].length; x++){
+          output += maze[y][x] + " ";
+        }
+        output += "\n";
+      }
+      return output;
+    }
 
     private void wait(int millis){
          try {
@@ -132,6 +142,7 @@ public class Maze{
     private int solve(int row, int col){ //you can add more parameters since this is private
         maze[row][col] == "@";
         int[][] moves = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+
 
         //automatic animation! You are welcome.
         if(animate){
