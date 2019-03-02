@@ -108,18 +108,20 @@ public class Maze{
 
     */
     public int solve(){
-      int y = 0;
-      int x = 0;
+      int r = 0;
+      int c = 0;
       //find the location of the S.
-      for (; y < maze.length; y++){
-        for (; x < maze[0].length; x++){
+      for (int y = 0; y < maze.length; y++){
+        for (int x = 0; x < maze[0].length; x++){
           if (maze[y][x] == 'S'){
             //erase the S
             maze[y][x] = ' ';
+            r = y;
+            c = x;
           }
         }
       }
-      return solve(y, x);
+      return solve(r, c);
     }
 
     /*
@@ -140,6 +142,7 @@ public class Maze{
         All visited spots that are part of the solution are changed to '@'
     */
     private int solve(int row, int col){ //you can add more parameters since this is private
+      System.out.println(row + " " + col);
       int output = 0;
       if(animate){
           clearTerminal();
