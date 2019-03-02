@@ -28,7 +28,7 @@ public class Maze{
 
     */
 
-    public Maze(String filename) throws FileNotFoundException{
+    public Maze(String fileName) throws FileNotFoundException{
       //do I use try to throw FileNotFound?
       File text = new File(fileName);
       Scanner inf = new Scanner(text);
@@ -43,7 +43,7 @@ public class Maze{
       int rows = lines.size();
       int cols = lines.get(0).length();
       //initializes maze Array
-      maze = new int[rows][cols];
+      maze = new char[rows][cols];
       //checks for 1 "E" and 1 "S"
       int e = 0;
       int s = 0;
@@ -60,7 +60,7 @@ public class Maze{
         }
       }
       if (e != 1 || s != 1){
-        throw new llegalStateException();
+        throw new IllegalStateException();
       }
     }
 
@@ -108,18 +108,18 @@ public class Maze{
 
     */
     public int solve(){
+      int y = 0;
+      int x = 0;
       //find the location of the S.
-      for (int y = 0; y < maze.length; y++){
-        for (int x = 0; x < maze[0].length; x++){
-          if (maze[y][x] == "S"){
+      for (; y < maze.length; y++){
+        for (; x < maze[0].length; x++){
+          if (maze[y][x] == 'S'){
             //erase the S
-            maze[y][x] = " ";
-            startRow = y;
-            startCol = x;
-            return solve(y, x, 0);
+            maze[y][x] = ' ';
           }
         }
       }
+      return solve(y, x);
     }
 
     /*
@@ -139,55 +139,31 @@ public class Maze{
 
         All visited spots that are part of the solution are changed to '@'
     */
-    private int solve(int row, int col, int output){ //you can add more parameters since this is private
-        maze[row][col] == "@";
-        output++;
+    private int solve(int row, int col){ //you can add more parameters since this is private
+      if(animate){
+          clearTerminal();
+          System.out.println(this);
+          wait(20);
+      }
+        maze[row][col] = '@';
         int[][] moves = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
         int fails = 0;
         for (int move = 0; move < 4; move++){
           int newRow = row + moves[move][0];
           int newCol = col + moves[move][1];
+          int output = solve(newRow, newCol);
           if (maze[newRow][newCol] == ' '){
-            solve(newRow, newCol, output);
+            return output + 1;
           }
           if (maze[newRow][newCol] == 'E'){
-            return output;
+            return 1;
           }
-          else{
-            fails++;
-          }
-        }
-        if (fails == 4){
-          maze[newRow][newCol] = '.';
-          output --;
-          for (int move = 0; move < 4; move++){
-            int fails1 = 0;
-            int newRow = row + moves[move][0];
-            int newCol = col + moves[move][1];
-            if (maze[newRow][newCol] == '@'){
-              solve(newRow, newCol, output);
-            }
-            else{
-              fails1++;
-            }
-          }
-          if (fails1 == 4){
-            return -1;
-          }
-          return output;
         }
 
         //automatic animation! You are welcome.
-        if(animate){
-
-            clearTerminal();
-            System.out.println(this);
-
-            wait(20);
-        }
 
         //COMPLETE SOLVE
-
+        maze[row][col] = -1;
         return -1; //so it compiles
     }
 
