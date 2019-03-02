@@ -140,30 +140,32 @@ public class Maze{
         All visited spots that are part of the solution are changed to '@'
     */
     private int solve(int row, int col){ //you can add more parameters since this is private
+      int output = 0;
       if(animate){
           clearTerminal();
           System.out.println(this);
           wait(20);
       }
-        maze[row][col] = '@';
-        int[][] moves = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
-        int fails = 0;
-        for (int move = 0; move < 4; move++){
-          int newRow = row + moves[move][0];
-          int newCol = col + moves[move][1];
-          int output = solve(newRow, newCol);
-          if (maze[newRow][newCol] == ' '){
+      maze[row][col] = '@';
+      int[][] moves = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+      for (int move = 0; move < 4; move++){
+        int newRow = row + moves[move][0];
+        int newCol = col + moves[move][1];
+        if (maze[newRow][newCol] == ' '){
+          output = solve(newRow, newCol);
+          if (output > -1){
             return output + 1;
           }
-          if (maze[newRow][newCol] == 'E'){
-            return 1;
-          }
         }
+        if (maze[newRow][newCol] == 'E'){
+          return 1;
+        }
+      }
 
         //automatic animation! You are welcome.
 
         //COMPLETE SOLVE
-        maze[row][col] = -1;
+        maze[row][col] = '.';
         return -1; //so it compiles
     }
 
