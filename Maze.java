@@ -44,10 +44,10 @@ public class Maze{
       int cols = lines.get(0).length();
       //initializes maze Array
       maze = new char[rows][cols];
-      //checks for 1 "E" and 1 "S"
+      //counts "E" and "S"
       int e = 0;
       int s = 0;
-      //adds chars to array
+      //adds chars to array and checks for exactly 1 "E" and 1 "S"
       for (int y = 0; y < rows; y++){
         for (int x = 0; x < cols; x++){
           maze[y][x] = lines.get(y).charAt(x);
@@ -142,12 +142,12 @@ public class Maze{
         All visited spots that are part of the solution are changed to '@'
     */
     private int solve(int row, int col){ //you can add more parameters since this is private
-      System.out.println(row + " " + col);
+      //counts
       int output = 0;
       if(animate){
           clearTerminal();
           System.out.println(this);
-          wait(20);
+          wait(150);
       }
       maze[row][col] = '@';
       int[][] moves = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
@@ -169,7 +169,7 @@ public class Maze{
 
         //COMPLETE SOLVE
         maze[row][col] = '.';
-        return -1; //so it compiles
+        return -1;
     }
 
 
